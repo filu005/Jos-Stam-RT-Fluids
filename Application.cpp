@@ -18,3 +18,8 @@ void Application::tick(void)
 {
 	_sim.run();
 }
+
+void Application::add_density(int idx_x, int idx_y)
+{
+	_sim.add_density(idx_x, idx_y);
+}

@@ -11,12 +11,20 @@ namespace c
 	const float viewWidth = aspectRatio * viewHeight;// 1.6
 }
 
+// simulation constants
+namespace c
+{
+	auto const dt = 1.0f / 60.0f;
+
+	auto const diffusion = 0.5f;
+}
+
 // grid constants
 namespace c
 {
 	// tylko potegi 2 (bo powstaja niedokladnosci przy dzieleniu m.in. przy dx/dy/dz)
-	auto const K = 32u;
-	auto const L = 32u;
+	auto const K = 128u;
+	auto const L = 128u;
 	auto const KL = K * L;
 
 	auto const ymin = -1.0f, xmin = -1.0f;

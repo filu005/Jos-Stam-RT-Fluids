@@ -38,11 +38,15 @@ void Painter::paint(Grid const & grid)
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, grid.get_density_texture());
+	glUniform1i(glGetUniformLocation(grid_shader.Program, "density_texture"), 0);
+
 	auto const & VAO = grid.getVAO();
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glBindVertexArray(VAO);
 	glDrawArraysInstanced(GL_TRIANGLES, 0, 6 * 2, grid.bin_count);
 	glBindVertexArray(0);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }

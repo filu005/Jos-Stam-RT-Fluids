@@ -145,7 +145,18 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	lastX = xposf;
 	lastY = yposf;
 
-	camera.ProcessMouseMovement(xoffset*2.5f, yoffset*2.5f);
+	// int GRID_NX = 1
+	// float mouseX_WS = (             _env.mx) / (float)_env.win_x;
+	// int cell_X = GRID_NX * (mouseX_WS - 0.f);
+	// int samp_IX = (int)((mouseX_WS * GRID_NX - cell_X) * (N+2));
+	auto const idx_coord_xpos = static_cast<int>(((static_cast<float>(c::screenWidth) - xposf) / c::screenWidth) * c::K);
+	auto const idx_coord_ypos = static_cast<int>( ((static_cast<float>(c::screenHeight) - yposf) / c::screenHeight) * c::L);
+
+	auto state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+
+	if(state == GLFW_PRESS)
+		app->add_density(idx_coord_xpos, idx_coord_ypos);
+	//camera.ProcessMouseMovement(xoffset*2.5f, yoffset*2.5f);
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)

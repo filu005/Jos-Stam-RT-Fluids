@@ -1,10 +1,16 @@
 #version 330 core
-in vec3 Position;
+uniform sampler2D density_texture;
+in vec4 Position;
 in vec3 outColor;
 
 out vec4 color;
 
 void main()
 {
-    color = vec4(outColor, 1.0);
+	vec2 projected_tex_coords = vec2(((Position.x / Position.w) + 1.0f ) / 2.0f,
+									  ((Position.y / Position.w) + 1.0f ) / 2.0f );
+
+	float density = texture(density_texture, projected_tex_coords).a;
+
+    color = vec4(vec3(density), 1.0);
 }

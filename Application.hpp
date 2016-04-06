@@ -14,6 +14,8 @@ public:
 	void paint();
 	void tick();
 
+	void add_density(int idx_x, int idx_y);
+
 	Camera camera;
 
 private:
